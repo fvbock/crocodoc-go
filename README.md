@@ -1,7 +1,7 @@
 crocodoc-go
 ===========
 
-Wrapper/library for the crocodoc REST API. This is a first version ...
+Wrapper/library for the [crocodoc REST API](https://crocodoc.com/docs/api). This is a first version ...
 
 
 Some examples
