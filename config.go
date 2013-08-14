@@ -3,7 +3,6 @@ package crocodoc
 const (
 	// your token here
 	// CROCODOC_API_TOKEN = "YOUR_TOKEN_HERE"
-	CROCODOC_API_TOKEN = "V1hzDE379tjL8JRnBUGl6bIg"
 
 	// default location for file downloads
 	DEFAULT_FILE_PATH      = "/tmp/"
