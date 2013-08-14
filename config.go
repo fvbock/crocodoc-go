@@ -31,7 +31,3 @@ const (
 	*/
 	SESSION_LIFETIME_MINUTES = 58
 )
-
-// 14dd41c5-6f33-484e-9090-6430d617c324
-
-// curl "https://crocodoc.com/api/v2/download/document?token=V1hzDE379tjL8JRnBUGl6bIg&uuid=14dd41c5-6f33-484e-9090-6430d617c324&filename=foobar.pdf"
