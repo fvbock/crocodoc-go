@@ -23,11 +23,13 @@ var cdoc *crocodoc.CrocoDoc // doc file
 Upload a doc
 
 ```
-d, err := crocodoc.Upload("Sample.doc")
+d, err := crocodoc.UploadFile("testdoc.docx")
 if err != nil {
    // do something
 }
 ```
+
+`UploadFile` is actually a wrapper for `Upload(fs io.ReadCloser, filename string)` which you can use to upload a file to crocodoc that comes from any `io.ReadCloser` stream.
 
 We initialized the doc object by uploading it. If you have an id from crocodoc stored somewhere and want to call any of the following functions you could also initialize it just with that id
 
