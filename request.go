@@ -189,7 +189,7 @@ func (c *CrocoDoc) CreateSession() (err error) {
 		err = errors.New("Cannot call CreateSession: No UUID is set on the CrocoDoc.")
 		return
 	}
-	if !c.SessionIdValidUntil.IsZero() && time.Now().After(c.SessionIdValidUntil) {
+	if !c.SessionIdValidUntil.IsZero() && time.Now().Before(c.SessionIdValidUntil) {
 		return
 	}
 	data := map[string]string{
