@@ -183,7 +183,6 @@ func (c *CrocoDoc) Delete() (deleted bool, err error) {
 	return
 }
 
-// func (c *CrocoDoc) CreateSession(editable bool, user []string, filter []string, admin bool, downloadable bool, copyprotected bool, sidebar string) (err error) {
 func (c *CrocoDoc) CreateSession() (err error) {
 	if c.Uuid == "" {
 		err = errors.New("Cannot call CreateSession: No UUID is set on the CrocoDoc.")
