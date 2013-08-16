@@ -3,7 +3,7 @@ package crocodoc
 import (
 	"errors"
 	"fmt"
-	"gorequests"
+	"github.com/fvbock/gorequests"
 	"io"
 	"log"
 	"os"
