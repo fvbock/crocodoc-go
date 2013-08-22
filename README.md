@@ -17,6 +17,10 @@ import (
 )
 
 var cdoc *crocodoc.CrocoDoc // doc file
+
+func init() {
+	crocodoc.SetToken("YOUR_API_TOKEN")
+}
 ```
 
 
