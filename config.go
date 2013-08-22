@@ -1,8 +1,9 @@
 package crocodoc
 
 const (
-	// your token here
-	// CROCODOC_API_TOKEN = "YOUR_TOKEN_HERE"
+	// your token should be in this file
+	TOKEN_FILE = "../token"
+	// TOKEN_FILE = "configs/crocodoc_token"
 
 	// default location for file downloads
 	DEFAULT_FILE_PATH      = "/tmp/"
@@ -16,7 +17,6 @@ const (
 	DOWNLOAD_ENDPOINT  = "https://crocodoc.com/api/v2/download/document"
 	THUMBNAIL_ENDPOINT = "https://crocodoc.com/api/v2/download/thumbnail"
 	GETTEXT_ENDPOINT   = "https://crocodoc.com/api/v2/download/text"
-	// VIEW_ENDPOINT      = "https://crocodoc.com/view"
 
 	// doc statuses
 	QUEUED     = 0 // document conversion has not yet begun
@@ -30,4 +30,9 @@ const (
 	time. to avoid delay related timouts we use 58 minutes instead.
 	*/
 	SESSION_LIFETIME_MINUTES = 58
+
+	// if we get a HTTP 400 response we will try again - or not
+	// RETRY_ON_RATELIMIT         = true
+	MAX_RETRY_ON_RATELIMIT     = 3
+	RETRY_ON_RATELIMIT_TIMEOUT = 5
 )

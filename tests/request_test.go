@@ -1,12 +1,16 @@
 package crocodoc
 
 import (
-	crocodoc "github.com/fvbock/crocodoc-go"
+	crocodoc "github.com/theplant/crocodoc-go"
 	"testing"
 	"time"
 )
 
 var CDocD, CDocX, CDocP *crocodoc.CrocoDoc // doc, xls, ppt
+
+func TestSetToken(t *testing.T) {
+	crocodoc.SetToken("YOUR_TOKEN_HERE")
+}
 
 func TestUpload(t *testing.T) {
 	// doc
@@ -17,7 +21,7 @@ func TestUpload(t *testing.T) {
 	}
 	CDocD = d
 	t.Log(CDocD)
-	time.Sleep(10 * time.Second)
+	// time.Sleep(10 * time.Second)
 	// ppt
 	d, err = crocodoc.UploadFile("testppt.pptx")
 	if err != nil {
@@ -28,7 +32,7 @@ func TestUpload(t *testing.T) {
 	t.Log(CDocP)
 
 	// xls
-	time.Sleep(5 * time.Second) // wait a bit - test accounts are rate limited to 2 cuncurrent conversions
+	// time.Sleep(5 * time.Second) // wait a bit - test accounts are rate limited to 2 cuncurrent conversions
 	d, err = crocodoc.UploadFile("testxls.xlsx")
 	if err != nil {
 		t.Log(err)
@@ -41,7 +45,8 @@ func TestUpload(t *testing.T) {
 func TestStatus(t *testing.T) {
 	// doc
 	t.Log("Checking Doc Status:", CDocD)
-	s, err := CDocD.GetStatus()
+	statusResponse, err := crocodoc.GetStatusesForIds([]string{CDocD.Uuid})
+	s := statusResponse[0]
 	if err != nil {
 		t.Log(err)
 		t.Fail()
@@ -50,7 +55,8 @@ func TestStatus(t *testing.T) {
 
 	if CDocD.Status == crocodoc.QUEUED || CDocD.Status == crocodoc.PROCESSING {
 		time.Sleep(10 * time.Second)
-		s, err = CDocD.GetStatus()
+		statusResponse, err := crocodoc.GetStatusesForIds([]string{CDocD.Uuid})
+		s := statusResponse[0]
 		if err != nil {
 			t.Log(err)
 			t.Fail()
@@ -60,7 +66,9 @@ func TestStatus(t *testing.T) {
 
 	// ppt
 	t.Log("Checking Doc Status:", CDocP)
-	s, err = CDocP.GetStatus()
+	// s, err = CDocP.GetStatus()
+	statusResponse, err = crocodoc.GetStatusesForIds([]string{CDocP.Uuid})
+	s = statusResponse[0]
 	if err != nil {
 		t.Log(err)
 		t.Fail()
@@ -69,7 +77,9 @@ func TestStatus(t *testing.T) {
 
 	if CDocP.Status == crocodoc.QUEUED || CDocP.Status == crocodoc.PROCESSING {
 		time.Sleep(10 * time.Second)
-		s, err = CDocP.GetStatus()
+		// s, err = CDocP.GetStatus()
+		statusResponse, err := crocodoc.GetStatusesForIds([]string{CDocP.Uuid})
+		s := statusResponse[0]
 		if err != nil {
 			t.Log(err)
 			t.Fail()
@@ -79,7 +89,9 @@ func TestStatus(t *testing.T) {
 
 	// xls
 	t.Log("Checking Doc Status:", CDocX)
-	s, err = CDocX.GetStatus()
+	// s, err = CDocX.GetStatus()
+	statusResponse, err = crocodoc.GetStatusesForIds([]string{CDocX.Uuid})
+	s = statusResponse[0]
 	if err != nil {
 		t.Log(err)
 		t.Fail()
@@ -88,7 +100,9 @@ func TestStatus(t *testing.T) {
 
 	if CDocX.Status == crocodoc.QUEUED || CDocX.Status == crocodoc.PROCESSING {
 		time.Sleep(10 * time.Second)
-		s, err = CDocX.GetStatus()
+		// s, err = CDocX.GetStatus()
+		statusResponse, err := crocodoc.GetStatusesForIds([]string{CDocX.Uuid})
+		s := statusResponse[0]
 		if err != nil {
 			t.Log(err)
 			t.Fail()
@@ -160,7 +174,7 @@ func TestCreateSession(t *testing.T) {
 	}
 	t.Log(CDocX)
 	t.Log("waiting for 60 seconds... test the session ids...")
-	time.Sleep(60 * time.Second)
+	time.Sleep(5 * time.Second)
 }
 
 func TestDownload(t *testing.T) {

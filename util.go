@@ -11,13 +11,17 @@ type CrocoError struct {
 	Message string `json:"error,omitempty"`
 }
 
+func SetToken(token string) {
+	CrocoDocToken = token
+}
+
 /*
 CheckResponse checks errors/messages for NON-ok (!= 200) requests.
 
 Errors that might be inside a status 200 response (eg. statuses requests) need
 to be checked separately.
 */
-func CheckResponse(r *gorequests.Response, noJson bool) (err error) {
+func checkResponse(r *gorequests.Response, noJson bool) (err error) {
 	if r.Status != 200 {
 		var jsonErrorMsg string
 		if !noJson {
@@ -33,8 +37,10 @@ func CheckResponse(r *gorequests.Response, noJson bool) (err error) {
 			err = errors.New(fmt.Sprintf("Unknown server error: status %v", r.Status))
 			return
 		} else {
-			for s, msg := range Http_4xx_errors {
+			for s, msg := range Http4xxErrors {
 				if s == r.Status {
+					// TODO? retry w limit?
+					// request_test.go:34: CrocoDoc Error (HTTP status 400): rate limit exceeded
 					err = errors.New(fmt.Sprintf("Server_error_%v: %s. %s", r.Status, msg, jsonErrorMsg))
 					break
 				}
