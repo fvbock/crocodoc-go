@@ -3,6 +3,7 @@ crocodoc-go
 
 Wrapper/library for the [crocodoc REST API](https://crocodoc.com/docs/api). This is a first version ...
 
+godoc documentation is [here](http://godoc.org/github.com/theplant/crocodoc-go).
 
 Some examples
 -------------
