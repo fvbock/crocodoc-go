@@ -1,10 +1,6 @@
 package crocodoc
 
 const (
-	// your token should be in this file
-	TOKEN_FILE = "../token"
-	// TOKEN_FILE = "configs/crocodoc_token"
-
 	// default location for file downloads
 	DEFAULT_FILE_PATH      = "/tmp/"
 	DEFAULT_THUMBNAIL_SIZE = "100x100"
