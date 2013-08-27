@@ -380,7 +380,6 @@ func GetStatusesForIds(uuids []string) (statuslist []*StatusResponse, err error)
 	err = checkResponse(r, false)
 	if err != nil {
 		log.Println(err)
-		return
 	}
 
 	err = r.UnmarshalJson(&statuslist)

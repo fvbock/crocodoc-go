@@ -39,8 +39,6 @@ func checkResponse(r *gorequests.Response, noJson bool) (err error) {
 		} else {
 			for s, msg := range Http4xxErrors {
 				if s == r.Status {
-					// TODO? retry w limit?
-					// request_test.go:34: CrocoDoc Error (HTTP status 400): rate limit exceeded
 					err = errors.New(fmt.Sprintf("Server_error_%v: %s. %s", r.Status, msg, jsonErrorMsg))
 					break
 				}
