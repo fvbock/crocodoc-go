@@ -9,7 +9,7 @@ import (
 var CDocD, CDocX, CDocP *crocodoc.CrocoDoc // doc, xls, ppt
 
 func TestSetToken(t *testing.T) {
-	crocodoc.SetToken("YOUR_TOKEN_HERE")
+	crocodoc.SetToken("V1hzDE379tjL8JRnBUGl6bIg")
 }
 
 func TestUpload(t *testing.T) {
@@ -21,7 +21,7 @@ func TestUpload(t *testing.T) {
 	}
 	CDocD = d
 	t.Log(CDocD)
-	// time.Sleep(10 * time.Second)
+	time.Sleep(10 * time.Second)
 	// ppt
 	d, err = crocodoc.UploadFile("testppt.pptx")
 	if err != nil {
@@ -31,15 +31,15 @@ func TestUpload(t *testing.T) {
 	CDocP = d
 	t.Log(CDocP)
 
-	// xls
+	// // xls
 	// time.Sleep(5 * time.Second) // wait a bit - test accounts are rate limited to 2 cuncurrent conversions
-	d, err = crocodoc.UploadFile("testxls.xlsx")
-	if err != nil {
-		t.Log(err)
-		t.Fail()
-	}
-	CDocX = d
-	t.Log(CDocX)
+	// d, err = crocodoc.UploadFile("testxls.xlsx")
+	// if err != nil {
+	// 	t.Log(err)
+	// 	t.Fail()
+	// }
+	// CDocX = d
+	// t.Log(CDocX)
 }
 
 func TestStatus(t *testing.T) {
@@ -87,28 +87,28 @@ func TestStatus(t *testing.T) {
 		t.Log("Doc Status:", s)
 	}
 
-	// xls
-	t.Log("Checking Doc Status:", CDocX)
-	// s, err = CDocX.GetStatus()
-	statusResponse, err = crocodoc.GetStatusesForIds([]string{CDocX.Uuid})
-	s = statusResponse[0]
-	if err != nil {
-		t.Log(err)
-		t.Fail()
-	}
-	t.Log("Doc Status:", s)
+	// // xls
+	// t.Log("Checking Doc Status:", CDocX)
+	// // s, err = CDocX.GetStatus()
+	// statusResponse, err = crocodoc.GetStatusesForIds([]string{CDocX.Uuid})
+	// s = statusResponse[0]
+	// if err != nil {
+	// 	t.Log(err)
+	// 	t.Fail()
+	// }
+	// t.Log("Doc Status:", s)
 
-	if CDocX.Status == crocodoc.QUEUED || CDocX.Status == crocodoc.PROCESSING {
-		time.Sleep(10 * time.Second)
-		// s, err = CDocX.GetStatus()
-		statusResponse, err := crocodoc.GetStatusesForIds([]string{CDocX.Uuid})
-		s := statusResponse[0]
-		if err != nil {
-			t.Log(err)
-			t.Fail()
-		}
-		t.Log("Doc Status:", s)
-	}
+	// if CDocX.Status == crocodoc.QUEUED || CDocX.Status == crocodoc.PROCESSING {
+	// 	time.Sleep(10 * time.Second)
+	// 	// s, err = CDocX.GetStatus()
+	// 	statusResponse, err := crocodoc.GetStatusesForIds([]string{CDocX.Uuid})
+	// 	s := statusResponse[0]
+	// 	if err != nil {
+	// 		t.Log(err)
+	// 		t.Fail()
+	// 	}
+	// 	t.Log("Doc Status:", s)
+	// }
 }
 
 func TestGetText(t *testing.T) {
@@ -136,17 +136,17 @@ func TestGetText(t *testing.T) {
 		t.Log(CDocP.ExtractedText)
 	}
 
-	// xls
-	err = CDocX.GetText()
-	if err != nil {
-		t.Log(err)
-		t.Fail()
-	}
-	if len(CDocX.ExtractedText) > 100 {
-		t.Log(CDocX.ExtractedText[:100])
-	} else {
-		t.Log(CDocX.ExtractedText)
-	}
+	// // xls
+	// err = CDocX.GetText()
+	// if err != nil {
+	// 	t.Log(err)
+	// 	t.Fail()
+	// }
+	// if len(CDocX.ExtractedText) > 100 {
+	// 	t.Log(CDocX.ExtractedText[:100])
+	// } else {
+	// 	t.Log(CDocX.ExtractedText)
+	// }
 }
 
 func TestCreateSession(t *testing.T) {
@@ -166,15 +166,15 @@ func TestCreateSession(t *testing.T) {
 	}
 	t.Log(CDocP)
 
-	// xls
-	err = CDocX.CreateSession()
-	if err != nil {
-		t.Log(err)
-		t.Fail()
-	}
-	t.Log(CDocX)
-	t.Log("waiting for 60 seconds... test the session ids...")
-	time.Sleep(5 * time.Second)
+	// // xls
+	// err = CDocX.CreateSession()
+	// if err != nil {
+	// 	t.Log(err)
+	// 	t.Fail()
+	// }
+	// t.Log(CDocX)
+	// t.Log("waiting for 60 seconds... test the session ids...")
+	// time.Sleep(5 * time.Second)
 }
 
 func TestDownload(t *testing.T) {
@@ -194,13 +194,13 @@ func TestDownload(t *testing.T) {
 	}
 	t.Log(CDocP)
 
-	// xls
-	err = CDocX.Download(false, "foobar.xls", false, "none")
-	if err != nil {
-		t.Log(err)
-		t.Fail()
-	}
-	t.Log(CDocX)
+	// // xls
+	// err = CDocX.Download(false, "foobar.xls", false, "none")
+	// if err != nil {
+	// 	t.Log(err)
+	// 	t.Fail()
+	// }
+	// t.Log(CDocX)
 }
 
 func TestThumbnail(t *testing.T) {
@@ -220,13 +220,13 @@ func TestThumbnail(t *testing.T) {
 	}
 	t.Log(CDocP)
 
-	// xls
-	err = CDocX.Thumbnail("", "foobar.png")
-	if err != nil {
-		t.Log(err)
-		t.Fail()
-	}
-	t.Log(CDocX)
+	// // xls
+	// err = CDocX.Thumbnail("", "foobar.png")
+	// if err != nil {
+	// 	t.Log(err)
+	// 	t.Fail()
+	// }
+	// t.Log(CDocX)
 }
 
 func TestDelete(t *testing.T) {
@@ -249,12 +249,12 @@ func TestDelete(t *testing.T) {
 	t.Log("Deleted?", del)
 	t.Log(CDocP)
 
-	// xls
-	del, err = CDocX.Delete()
-	if err != nil {
-		t.Log(err)
-		t.Fail()
-	}
-	t.Log("Deleted?", del)
-	t.Log(CDocX)
+	// // xls
+	// del, err = CDocX.Delete()
+	// if err != nil {
+	// 	t.Log(err)
+	// 	t.Fail()
+	// }
+	// t.Log("Deleted?", del)
+	// t.Log(CDocX)
 }

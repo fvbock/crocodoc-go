@@ -38,7 +38,7 @@ func Upload(fs io.ReadCloser, filename string) (cf *CrocoDoc, err error) {
 		"file": map[string]io.ReadCloser{filename: fs},
 	}
 
-	r := gorequests.Retry(gorequests.Post(UPLOAD_ENDPOINT, data, files, -1), MAX_RETRY_ON_RATELIMIT, RETRY_ON_RATELIMIT_TIMEOUT, []int{400})
+	r := gorequests.Retry(gorequests.Post(UPLOAD_ENDPOINT, nil, data, files, -1), MAX_RETRY_ON_RATELIMIT, RETRY_ON_RATELIMIT_TIMEOUT, []int{400})
 	if r.Error != nil {
 		log.Println(r.Error)
 		return
@@ -111,7 +111,7 @@ func (c *CrocoDoc) Delete() (deleted bool, err error) {
 		"uuid":  c.Uuid,
 	}
 
-	r := gorequests.Post(DELETE_ENDPOINT, data, nil, -1)
+	r := gorequests.Post(DELETE_ENDPOINT, nil, data, nil, -1)
 	if r.Error != nil {
 		log.Println(err)
 	}
@@ -152,7 +152,7 @@ func (c *CrocoDoc) CreateSession() (err error) {
 		"uuid":  c.Uuid,
 	}
 
-	r := gorequests.Post(SESSION_ENDPOINT, data, nil, -1)
+	r := gorequests.Post(SESSION_ENDPOINT, nil, data, nil, -1)
 	if r.Error != nil {
 		log.Println(r.Error)
 		return
@@ -194,7 +194,7 @@ func (c *CrocoDoc) GetText() (err error) {
 		return
 	}
 
-	r := gorequests.Get(GETTEXT_ENDPOINT, data, -1)
+	r := gorequests.Get(GETTEXT_ENDPOINT, nil, data, -1)
 	if r.Error != nil {
 		log.Println(r.Error)
 		return
@@ -259,7 +259,7 @@ func (c *CrocoDoc) Download(asPdf bool, filename string, withAnnotations bool, f
 		log.Println(err)
 	}
 
-	r := gorequests.Get(DOWNLOAD_ENDPOINT, data, -1)
+	r := gorequests.Get(DOWNLOAD_ENDPOINT, nil, data, -1)
 	log.Println(r.Headers())
 	if r.Error != nil {
 		log.Println(r.Error)
@@ -318,7 +318,7 @@ func (c *CrocoDoc) Thumbnail(size string, filename string) (err error) {
 		log.Println(err)
 	}
 
-	r := gorequests.Get(THUMBNAIL_ENDPOINT, data, -1)
+	r := gorequests.Get(THUMBNAIL_ENDPOINT, nil, data, -1)
 	log.Println(r.Headers())
 	if r.Error != nil {
 		log.Println(r.Error)
@@ -372,7 +372,7 @@ func GetStatusesForIds(uuids []string) (statuslist []*StatusResponse, err error)
 		return statuslist, err
 	}
 
-	r := gorequests.Get(STATUS_ENDPOINT, data, -1)
+	r := gorequests.Get(STATUS_ENDPOINT, nil, data, -1)
 	if r.Error != nil {
 		log.Println(r.Error)
 		return statuslist, r.Error
